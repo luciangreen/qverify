@@ -1,0 +1,402 @@
+qverify: 200 inputs and outputs, from real runs (io/ios.pl has the same as Prolog facts).
+
+1. verify3([ccnot(1,2,0),x(1),x(2),cnot(2,1)], 3, toffoli)
+   => counterexample([0,0,0],want([0,0,0]),got([0,0,1]))
+2. run([ccnot(2,3,1)], [1,1,0,0])
+   => [1,1,0,0]
+3. reversible([_678,x(0),x(2)], 4)
+   => false
+4. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+5. verify3([x(0),x(0),x(0)], 3, swap01)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,0]))
+6. run([x(0),x(1),x(0),x(0)], [1,0,1])
+   => [0,1,1]
+7. reversible([x(2),_1024,cnot(0,1),x(1)], 3)
+   => false
+8. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+9. verify3([], 3, identity)
+   => ok
+10. run([cnot(2,0)], [0,0,0])
+   => [0,0,0]
+11. reversible([ccnot(2,0,1),x(0),x(3),ccnot(2,1,0)], 4)
+   => true
+12. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+13. verify3([], 3, xor_into_2)
+   => counterexample([0,1,0],want([0,1,1]),got([0,1,0]))
+14. run([x(0)], [0,0,0])
+   => [1,0,0]
+15. reversible([_1544,x(2),x(1),cnot(1,0)], 4)
+   => false
+16. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+17. verify3([x(0),x(1),ccnot(0,2,1),x(0)], 3, toffoli)
+   => counterexample([0,0,0],want([0,0,0]),got([0,1,0]))
+18. run([x(0)], [1,1,0])
+   => [0,1,0]
+19. reversible([ccnot(2,1,0),cnot(2,0)], 4)
+   => true
+20. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+21. verify3([x(0),x(1),ccnot(0,1,2),x(0)], 3, xor_into_2)
+   => counterexample([0,0,0],want([0,0,0]),got([0,1,1]))
+22. run([x(2)], [0,1,0])
+   => [0,1,1]
+23. reversible([cnot(0,1),cnot(0,1),cnot(0,2)], 3)
+   => true
+24. verify_adder([], 4, half_adder)
+   => counterexample([0,1,0,0],want([0,1,1,0]),got([0,1,0,0]))
+25. verify3([cnot(1,0),cnot(0,2)], 3, swap01)
+   => counterexample([0,1,0],want([1,0,0]),got([1,1,1]))
+26. run([x(0)], [0,1,0,0])
+   => [1,1,0,0]
+27. reversible([], 4)
+   => true
+28. verify_adder([x(1),x(3),cnot(0,2),x(1)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([0,0,0,1]))
+29. verify3([x(0),x(0),x(0),x(1)], 3, swap01)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,0]))
+30. run([cnot(1,2),x(0),cnot(2,0)], [1,1,1])
+   => [0,1,0]
+31. reversible([], 4)
+   => true
+32. verify_adder([x(1),x(0),cnot(2,1),x(2)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,1,1,0]))
+33. verify3([x(1),cnot(0,2),x(0),x(2)], 3, xor_into_2)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,1]))
+34. run([x(0)], [0,0,1,1])
+   => [1,0,1,1]
+35. reversible([x(1),x(0),x(0),_3426], 3)
+   => false
+36. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+37. verify3([cnot(1,0)], 3, toffoli)
+   => counterexample([0,1,0],want([0,1,0]),got([1,1,0]))
+38. run([cnot(0,2),ccnot(0,2,1),x(0),x(2)], [1,0,1])
+   => [0,0,1]
+39. reversible([_3758,x(3)], 4)
+   => false
+40. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+41. verify3([cnot(1,0)], 3, identity)
+   => counterexample([0,1,0],want([0,1,0]),got([1,1,0]))
+42. run([], [0,0,0,0])
+   => [0,0,0,0]
+43. reversible([ccnot(1,2,3),x(0)], 4)
+   => true
+44. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+45. verify3([x(1),x(0),ccnot(2,1,0),x(2)], 3, swap01)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,1]))
+46. run([], [0,1,0,0])
+   => [0,1,0,0]
+47. reversible([], 4)
+   => true
+48. verify_adder([x(3)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([0,0,0,1]))
+49. verify3([x(1)], 3, toffoli)
+   => counterexample([0,0,0],want([0,0,0]),got([0,1,0]))
+50. run([x(0),x(1),x(1),x(0)], [1,0,1,0])
+   => [1,0,1,0]
+51. reversible([x(1),cnot(0,3),_4714], 4)
+   => false
+52. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+53. verify3([x(0),ccnot(2,1,0)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,0]))
+54. run([ccnot(3,1,2),ccnot(3,0,1),cnot(2,3)], [0,0,1,1])
+   => [0,0,1,0]
+55. reversible([x(0),ccnot(1,0,2)], 3)
+   => true
+56. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+57. verify3([x(0),x(0),x(1)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([0,1,0]))
+58. run([x(0)], [1,1,1])
+   => [0,1,1]
+59. reversible([x(0)], 3)
+   => true
+60. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+61. verify3([x(0),x(0),x(2)], 3, xor_into_2)
+   => counterexample([0,0,0],want([0,0,0]),got([0,0,1]))
+62. run([x(2),x(0),cnot(1,2),x(0)], [0,1,0])
+   => [0,1,0]
+63. reversible([ccnot(1,2,0)], 3)
+   => true
+64. verify_adder([], 4, half_adder)
+   => counterexample([0,1,0,0],want([0,1,1,0]),got([0,1,0,0]))
+65. verify3([cnot(0,2),x(0),x(1)], 3, xor_into_2)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,0]))
+66. run([x(3),x(3),cnot(0,2)], [0,1,1,0])
+   => [0,1,1,0]
+67. reversible([cnot(2,1),cnot(1,2)], 3)
+   => true
+68. verify_adder([x(1),x(0),x(3),ccnot(0,3,1)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,0,0,1]))
+69. verify3([x(1),x(1),x(2),ccnot(1,0,2)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([0,0,1]))
+70. run([x(0),cnot(3,2),x(3)], [1,0,1,0])
+   => [0,0,1,1]
+71. reversible([], 3)
+   => true
+72. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+73. verify3([], 3, xor_into_2)
+   => counterexample([0,1,0],want([0,1,1]),got([0,1,0]))
+74. run([x(3),cnot(0,2)], [1,1,0,1])
+   => [1,1,1,0]
+75. reversible([x(2),ccnot(0,3,1),x(1)], 4)
+   => true
+76. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+77. verify3([x(0)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,0]))
+78. run([x(0),x(1)], [0,1,0])
+   => [1,0,0]
+79. reversible([cnot(2,1)], 3)
+   => true
+80. verify_adder([], 4, half_adder)
+   => counterexample([0,1,0,0],want([0,1,1,0]),got([0,1,0,0]))
+81. verify3([x(0),x(2),x(1)], 3, swap01)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,1]))
+82. run([x(1),cnot(0,2)], [0,0,1])
+   => [0,1,1]
+83. reversible([x(1),x(2),x(1),x(0)], 3)
+   => true
+84. verify_adder([x(1),x(1)], 4, half_adder)
+   => counterexample([0,1,0,0],want([0,1,1,0]),got([0,1,0,0]))
+85. verify3([cnot(0,2),x(0)], 3, swap01)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,0]))
+86. run([ccnot(0,2,1),ccnot(1,0,2),x(0),x(1)], [1,1,1])
+   => [0,1,1]
+87. reversible([_7862,x(2)], 4)
+   => false
+88. verify_adder([x(0),cnot(1,0)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,0,0,0]))
+89. verify3([cnot(1,0)], 3, identity)
+   => counterexample([0,1,0],want([0,1,0]),got([1,1,0]))
+90. run([x(3),x(0)], [1,0,1,1])
+   => [0,0,1,0]
+91. reversible([x(2),cnot(0,2),x(2),x(0)], 3)
+   => true
+92. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+93. verify3([x(0)], 3, toffoli)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,0]))
+94. run([x(1),x(0)], [1,0,1,1])
+   => [0,1,1,1]
+95. reversible([], 3)
+   => true
+96. verify_adder([ccnot(3,0,1),x(0),x(1)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,1,0,0]))
+97. verify3([cnot(0,1)], 3, identity)
+   => counterexample([1,0,0],want([1,0,0]),got([1,1,0]))
+98. run([x(0),x(0),x(2)], [0,0,1])
+   => [0,0,0]
+99. reversible([], 4)
+   => true
+100. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+101. verify3([cnot(1,2),x(2),x(0)], 3, toffoli)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,1]))
+102. run([x(0),x(0),cnot(0,2)], [0,0,1])
+   => [0,0,1]
+103. reversible([], 3)
+   => true
+104. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+105. verify3([cnot(1,0),x(1),x(0),x(2)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,1]))
+106. run([ccnot(1,0,3),x(0),cnot(0,1),cnot(1,3)], [0,0,0,1])
+   => [1,1,0,0]
+107. reversible([x(0),cnot(0,1),cnot(2,1)], 3)
+   => true
+108. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+109. verify3([x(0),x(0),x(0)], 3, swap01)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,0]))
+110. run([x(0),x(2),x(1)], [1,0,0])
+   => [0,1,1]
+111. reversible([cnot(3,0)], 4)
+   => true
+112. verify_adder([x(0)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,0,0,0]))
+113. verify3([], 3, toffoli)
+   => counterexample([1,1,0],want([1,1,1]),got([1,1,0]))
+114. run([], [0,0,1])
+   => [0,0,1]
+115. reversible([x(1),x(0),_10214], 4)
+   => false
+116. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+117. verify3([], 3, swap01)
+   => counterexample([0,1,0],want([1,0,0]),got([0,1,0]))
+118. run([x(0),x(0),cnot(2,1)], [0,1,1])
+   => [0,0,1]
+119. reversible([x(0),x(2),_10510], 3)
+   => false
+120. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+121. verify3([cnot(1,0),x(1)], 3, xor_into_2)
+   => counterexample([0,0,0],want([0,0,0]),got([0,1,0]))
+122. run([x(0),x(3)], [0,0,1,0])
+   => [1,0,1,1]
+123. reversible([x(0),cnot(0,3),cnot(0,3)], 4)
+   => true
+124. verify_adder([x(0)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,0,0,0]))
+125. verify3([x(0),cnot(2,0),ccnot(1,0,2),x(0)], 3, identity)
+   => counterexample([0,0,1],want([0,0,1]),got([1,0,1]))
+126. run([x(0),x(0),ccnot(0,1,3)], [1,1,0,0])
+   => [1,1,0,1]
+127. reversible([], 3)
+   => true
+128. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+129. verify3([cnot(2,0),x(1),x(2),cnot(1,2)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([0,1,0]))
+130. run([x(1),x(1),ccnot(0,1,2)], [1,0,1])
+   => [1,0,1]
+131. reversible([x(3),x(1),cnot(2,0)], 4)
+   => true
+132. verify_adder([x(1)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([0,1,0,0]))
+133. verify3([], 3, xor_into_2)
+   => counterexample([0,1,0],want([0,1,1]),got([0,1,0]))
+134. run([x(0)], [0,1,0])
+   => [1,1,0]
+135. reversible([x(1),cnot(0,2),_11908], 3)
+   => false
+136. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+137. verify3([x(0),x(0),x(1),x(0)], 3, swap01)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,0]))
+138. run([cnot(2,0),x(1),x(1)], [0,1,0])
+   => [0,1,0]
+139. reversible([], 3)
+   => true
+140. verify_adder([], 4, half_adder)
+   => counterexample([0,1,0,0],want([0,1,1,0]),got([0,1,0,0]))
+141. verify3([x(0),x(0),x(0),x(2)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,1]))
+142. run([x(0),x(3),cnot(2,0)], [1,0,0,0])
+   => [0,0,0,1]
+143. reversible([], 3)
+   => true
+144. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+145. verify3([ccnot(0,2,1),x(2),cnot(1,0),x(0)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,1]))
+146. run([], [1,0,0,0])
+   => [1,0,0,0]
+147. reversible([x(0)], 4)
+   => true
+148. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+149. verify3([x(0),x(1)], 3, toffoli)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,0]))
+150. run([cnot(3,1),ccnot(2,3,1)], [0,1,0,1])
+   => [0,0,0,1]
+151. reversible([ccnot(3,1,2)], 4)
+   => true
+152. verify_adder([x(0),x(1),ccnot(2,1,3)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,1,0,0]))
+153. verify3([x(1),cnot(0,2),x(1)], 3, xor_into_2)
+   => counterexample([0,1,0],want([0,1,1]),got([0,1,0]))
+154. run([], [1,1,0,0])
+   => [1,1,0,0]
+155. reversible([x(2),x(2),cnot(2,1)], 3)
+   => true
+156. verify_adder([ccnot(0,2,1),x(0),x(3),x(1)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,1,0,1]))
+157. verify3([ccnot(2,0,1),x(0),x(0),x(1)], 3, toffoli)
+   => counterexample([0,0,0],want([0,0,0]),got([0,1,0]))
+158. run([], [0,1,1])
+   => [0,1,1]
+159. reversible([ccnot(0,2,1),x(1),x(1)], 3)
+   => true
+160. verify_adder([x(2),x(2),x(0)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,0,0,0]))
+161. verify3([], 3, toffoli)
+   => counterexample([1,1,0],want([1,1,1]),got([1,1,0]))
+162. run([x(2),x(0),x(0)], [0,1,1])
+   => [0,1,0]
+163. reversible([ccnot(1,3,2),cnot(0,3),x(1)], 4)
+   => true
+164. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+165. verify3([x(2),x(0),cnot(0,2),ccnot(1,2,0)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([1,0,0]))
+166. run([ccnot(3,1,2),cnot(3,1),cnot(2,3),cnot(3,0)], [0,0,1,0])
+   => [1,0,1,1]
+167. reversible([x(1)], 3)
+   => true
+168. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+169. verify3([], 3, identity)
+   => ok
+170. run([], [0,0,1])
+   => [0,0,1]
+171. reversible([_42204,_42210,ccnot(3,1,0),x(3)], 4)
+   => false
+172. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+173. verify3([x(2)], 3, identity)
+   => counterexample([0,0,0],want([0,0,0]),got([0,0,1]))
+174. run([x(0),x(0),x(2),cnot(2,1)], [1,0,1])
+   => [1,0,0]
+175. reversible([ccnot(2,3,1)], 4)
+   => true
+176. verify_adder([ccnot(0,1,3),cnot(0,2),cnot(1,2)], 4, half_adder)
+   => ok
+177. verify3([x(0),x(1)], 3, xor_into_2)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,0]))
+178. run([cnot(1,2),x(2)], [1,0,0])
+   => [1,0,1]
+179. reversible([cnot(0,3)], 4)
+   => true
+180. verify_adder([ccnot(2,0,3),x(0)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,0,0,0]))
+181. verify3([x(0),x(1),cnot(2,0)], 3, xor_into_2)
+   => counterexample([0,0,0],want([0,0,0]),got([1,1,0]))
+182. run([ccnot(2,0,3),x(2),x(0),x(2)], [1,0,1,0])
+   => [0,0,1,1]
+183. reversible([x(1),_56816], 3)
+   => false
+184. verify_adder([ccnot(3,0,2)], 4, half_adder)
+   => counterexample([0,1,0,0],want([0,1,1,0]),got([0,1,0,0]))
+185. verify3([cnot(1,2)], 3, toffoli)
+   => counterexample([0,1,0],want([0,1,0]),got([0,1,1]))
+186. run([x(0),x(0),ccnot(1,0,2)], [1,0,0])
+   => [1,0,0]
+187. reversible([x(1),cnot(0,3),ccnot(0,3,2),_61302], 4)
+   => false
+188. verify_adder([x(2)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([0,0,1,0]))
+189. verify3([], 3, swap01)
+   => counterexample([0,1,0],want([1,0,0]),got([0,1,0]))
+190. run([x(0),x(0)], [1,1,0])
+   => [1,1,0]
+191. reversible([x(0),x(0),x(0),_65746], 3)
+   => false
+192. verify_adder([cnot(0,1),cnot(0,3)], 4, half_adder)
+   => counterexample([0,1,0,0],want([0,1,1,0]),got([0,1,0,0]))
+193. verify3([], 3, swap01)
+   => counterexample([0,1,0],want([1,0,0]),got([0,1,0]))
+194. run([], [0,0,0,0])
+   => [0,0,0,0]
+195. reversible([], 3)
+   => true
+196. verify_adder([x(1),x(1),x(0),x(2)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([1,0,1,0]))
+197. verify3([x(1),x(2),x(0),x(0)], 3, toffoli)
+   => counterexample([0,0,0],want([0,0,0]),got([0,1,1]))
+198. run([cnot(2,1)], [1,1,1,0])
+   => [1,0,1,0]
+199. reversible([_75504,_75510,cnot(2,3)], 4)
+   => false
+200. verify_adder([x(2),x(3),x(3),x(1)], 4, half_adder)
+   => counterexample([0,0,0,0],want([0,0,0,0]),got([0,1,1,0]))
