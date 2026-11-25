@@ -24,3 +24,9 @@ theorem(verdicts_are_true) :- forall(( circuit(G), member(S, [xor_into_2, toffol
 % 4. The known circuits are verified: the adder, xor, toffoli and swap (three cnots).
 theorem(known_circuits_verified) :- adder(A), verify(A, 4, half_adder, ok), verify([cnot(0, 2), cnot(1, 2)], 3, xor_into_2, ok),
     verify([ccnot(0, 1, 2)], 3, toffoli, ok), verify([cnot(0, 1), cnot(1, 0), cnot(0, 1)], 3, swap01, ok), verify([], 3, identity, ok).
+
+% 5. ok is never given for a circuit or spec that cannot run: every gate on a missing bit, and every spec
+% of the wrong width, is reported, on the first input.
+theorem(cannot_run_is_reported) :- forall(( member(T, [3, 4, 7]), member(G, [x(T), cnot(0, T), ccnot(0, 1, T), cnot(T, 0)]), circuit(C) ),
+    ( append(C, [G], C2), verify(C2, 3, identity, cannot_run([0, 0, 0], circuit)) )),
+    forall(circuit(C), verify(C, 3, half_adder, cannot_run([0, 0, 0], spec))).

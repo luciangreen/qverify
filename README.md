@@ -1,6 +1,6 @@
 # qverify
 
-prove that a reversible circuit (as pl2qc would make) matches its Prolog spec on every basis state. Circuits use x(T), cnot(C, T) and ccnot(C1, C2, T) on bit registers; a spec is a Prolog predicate on lists of bits. verify/4 checks all 2^N inputs and returns ok or the first counterexample; reversibility and inverses are checked the same way.
+prove that a reversible circuit (as pl2qc would make) matches its Prolog spec on every basis state. Circuits use x(T), cnot(C, T) and ccnot(C1, C2, T) on bit registers; a spec is a Prolog predicate on lists of bits. verify/4 checks all 2^N inputs and returns ok, the first counterexample, or cannot_run if the circuit or the spec gives no answer on some input; reversibility and inverses are checked the same way.
 
 ## Use
 
@@ -9,16 +9,18 @@ prove that a reversible circuit (as pl2qc would make) matches its Prolog spec on
 ?- verify([cnot(0, 2), cnot(1, 2)], 3, xor_into_2, R).          % R = ok
 ?- verify([cnot(0, 2)], 3, xor_into_2, R).                      % R = counterexample([0,1,0], want([0,1,1]), got([0,1,0]))
 ?- adder(C), verify(C, 4, half_adder, R).                       % R = ok
+?- verify([x(5)], 3, identity, R).                              % R = cannot_run([0,0,0], circuit)
 ```
 
 ## Proofs
 
-`proofs/theorems.pl` proves 4 theorems by exhaustion: each one is checked for every case in a finite domain that covers every branch of the definitions. every circuit of up to 2 gates on 3 bits; the specs on 3 bits.
+`proofs/theorems.pl` proves 5 theorems by exhaustion: each one is checked for every case in a finite domain that covers every branch of the definitions. every circuit of up to 2 gates on 3 bits; the specs on 3 bits.
 
 1. Every circuit is reversible (a permutation of the basis states).
 2. A circuit followed by its inverse is the identity.
 3. ok means the circuit matches the spec on every input; a counterexample is real.
 4. The known circuits are verified: the adder, xor, toffoli and swap (three cnots).
+5. ok is never given when the circuit or the spec cannot run: a gate on a bit that is not there, or a spec for another width, is reported as cannot_run on the first input.
 
 ```sh
 swipl -g main -t halt proofs/theorems.pl
